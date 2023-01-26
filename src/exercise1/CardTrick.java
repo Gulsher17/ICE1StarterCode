@@ -8,33 +8,52 @@ package exercise1;
  * @author dancye
  * @author Paul Bonenfant Jan 25, 2022 
  */
+import java.util.Scanner;
 public class CardTrick {
     
     public static void main(String[] args) {
-        
+        Scanner input=new Scanner(System.in);
         Card[] hand = new Card[7];
 
         for (int i = 0; i < hand.length; i++) {
             Card card = new Card();
-            //card.setValue(insert call to random number generator here)
-            // 
-            //card.setSuit(Card.SUITS[insert call to random number between 0-3 here])
-            // Hint: You can use Random -> random.nextInt(n) to get a random number between 0 and n-1 (inclusive)
-            //       Don't worry about duplicates at this point
+            card.setValue((int)(1+Math.random()*13));
+            card.setSuit(Card.SUITS[((int)(Math.random()*3)+1)]);
+            hand[i] = card;
+        //System.out.println(hand[i].getSuit() + " " + hand[i].getValue());
         }
-
-        // insert code to ask the user for Card value and suit, create their card
-        // and search the hand here. 
-        // Hint: You can ask for values 1 to 10, and then
-        //       11 for jack, 12 for queen, etc. (remember arrays are 0-based though)
-        //       1 for Hearts, 2 for Diamonds, etc. (remember arrays are 0-based though)
-        // 
-        // Then loop through the cards in the array to see if there's a match.
+        int i=0;
+        do
+        {
+        System.out.println("Enter the Card Value");
+            int value = input.nextInt();
+        System.out.println("Enter the Suit");
+            String suit = input.next();
         
-        // If the guess is successful, invoke the printInfo() method below.
-        
+        if(value==hand[i].getValue())
+        {
+            if(suit==hand[i].getSuit())
+            {
+                System.out.println("You Guessed It Right");   
+            }
+            printInfo();
+            break;
+        }
+        else
+        {
+            System.out.println();
+            System.out.println("Your guess was incorrect. Have another go?");   
+            System.out.println();
+        }
+            
+        }
+        while(!true);
+        for(int j=0;j< hand.length;j++)
+        {
+            System.out.println(hand[j].getSuit() + " " + hand[j].getValue());
+        }
     }
-
+//Since displaying the array before the user input is irrational, I have added the array print command at the bottom. 
     /**
      * A simple method to print out personal information. Follow the instructions to 
      * replace this information with your own.
